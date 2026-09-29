@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Femboy Duo Clock 💜</title>
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;
+font-family:system-ui,sans-serif;background:radial-gradient(circle at top,#5b285f,#160d1b 65%);
+color:white;padding:24px}
+.wrap{width:min(900px,100%);text-align:center}
+h1{font-size:clamp(28px,6vw,52px);margin:0 0 8px}
+.sub{opacity:.75;margin-bottom:24px}
+.clocks{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{padding:28px 18px;border:1px solid #ffffff22;border-radius:24px;background:#ffffff0d;backdrop-filter:blur(12px)}
+.flag{font-size:42px}.name{font-size:22px;font-weight:700}
+.time{font-size:clamp(34px,8vw,64px);font-weight:800}
+.date{opacity:.72;margin-top:6px}
+@media(max-width:650px){.clocks{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<h1>💜 Femboy Duo Clock 💜</h1>
+<div class="sub">Two time zones · one friendship ✨</div>
+
+<section class="clocks">
+<article class="card">
+<div class="flag">🇺🇸</div>
+<div class="name">Minnesota</div>
+<div class="time" id="us-time">--:--:--</div>
+<div class="date" id="us-date">---</div>
+</article>
+
+<article class="card">
+<div class="flag">🇩🇪</div>
+<div class="name">Germany</div>
+<div class="time" id="de-time">--:--:--</div>
+<div class="date" id="de-date">---</div>
+</article>
+</section>
+
+<p>♡ always 2 time zones apart, never too far apart ♡</p>
+</main>
+
+<script>
+const t=(zone,opt)=>new Intl.DateTimeFormat('en-US',{timeZone:zone,...opt});
+
+function update(){
+ const now=new Date();
+ document.getElementById('us-time').textContent=
+   t('America/Chicago',{hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true}).format(now);
+ document.getElementById('de-time').textContent=
+   t('Europe/Berlin',{hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true}).format(now);
+
+ document.getElementById('us-date').textContent=
+   t('en-US',{timeZone:'America/Chicago',weekday:'long',month:'long',day:'numeric',year:'numeric'}).format(now);
+ document.getElementById('de-date').textContent=
+   t('en-US',{timeZone:'Europe/Berlin',weekday:'long',month:'long',day:'numeric',year:'numeric'}).format(now);
+}
+update(); setInterval(update,1000);
+</script>
+</body></html>
